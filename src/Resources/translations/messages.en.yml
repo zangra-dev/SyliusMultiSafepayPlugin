@@ -1,0 +1,8 @@
+bitbag_sylius_multisafepay:
+    ui:
+        api_key: API Key
+        multisafepay_gateway_label: MultiSafepay
+        type: Type
+        payment_link: Payment link
+        redirect_order: Redirect order
+        sandbox: Sandbox

@@ -1,0 +1,5 @@
+bitbag_sylius_multisafepay:
+    api_key:
+        not_blank: API Key cannot be blank.
+    type:
+        not_blank: Type cannot be blank.
