@@ -84,7 +84,7 @@ final class CaptureAction implements ActionInterface, ApiAwareInterface, Gateway
         $paymentData['payment_options'] = [
             'notification_url' => $notificationUrl,
             'redirect_url' => $token->getTargetUrl(),
-            'cancel_url' => sprintf('%s?type=%S', $token->getTargetUrl(), MultiSafepayApiClientInterface::STATUS_CANCEL),
+            'cancel_url' => sprintf('%s?type=%s', $token->getTargetUrl(), MultiSafepayApiClientInterface::STATUS_CANCEL),
         ];
 
         $details['paymentData'] = $paymentData;

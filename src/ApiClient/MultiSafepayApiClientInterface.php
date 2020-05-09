@@ -26,6 +26,10 @@ interface MultiSafepayApiClientInterface
     public const STATUS_INITIALIZED = 'initialized';
     public const STATUS_UNCLEARED = 'uncleared';
     public const STATUS_DECLINED = 'declined';
+    public const STATUS_EXPIRED = 'expired';
+    public const STATUS_REFUNDED = 'refunded';
+    public const STATUS_RESERVED = 'reserved';
+    public const STATUS_VOID = 'void';
 
     public function initialise(string $apiKey, string $type, bool $sandbox = true): void;
 
