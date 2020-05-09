@@ -14,11 +14,11 @@ namespace BitBag\SyliusMultiSafepayPlugin\Action;
 
 use BitBag\SyliusMultiSafepayPlugin\ApiClient\MultiSafepayApiClientInterface;
 use Payum\Core\Action\ActionInterface;
+use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\GatewayAwareInterface;
 use Payum\Core\GatewayAwareTrait;
 use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Request\GetStatusInterface;
-use Payum\Core\Exception\RequestNotSupportedException;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 final class StatusAction implements ActionInterface, GatewayAwareInterface
@@ -51,16 +51,20 @@ final class StatusAction implements ActionInterface, GatewayAwareInterface
         switch ($details['status']) {
             case MultiSafepayApiClientInterface::STATUS_CANCELED:
                 $request->markCanceled();
+
                 break;
             case MultiSafepayApiClientInterface::STATUS_COMPLETED:
                 $request->markCaptured();
+
                 break;
             case MultiSafepayApiClientInterface::STATUS_INITIALIZED:
             case MultiSafepayApiClientInterface::STATUS_UNCLEARED:
                 $request->markPending();
+
                 break;
             case MultiSafepayApiClientInterface::STATUS_DECLINED:
                 $request->markFailed();
+
                 break;
         }
     }

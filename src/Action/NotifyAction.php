@@ -15,12 +15,12 @@ namespace BitBag\SyliusMultiSafepayPlugin\Action;
 use BitBag\SyliusMultiSafepayPlugin\Action\Api\ApiAwareTrait;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\ApiAwareInterface;
+use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\GatewayAwareInterface;
 use Payum\Core\GatewayAwareTrait;
 use Payum\Core\Reply\HttpResponse;
 use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Request\Notify;
-use Payum\Core\Bridge\Spl\ArrayObject;
 use Psr\Log\LoggerInterface;
 
 final class NotifyAction implements ActionInterface, ApiAwareInterface, GatewayAwareInterface

@@ -15,14 +15,14 @@ namespace BitBag\SyliusMultiSafepayPlugin\Action;
 use BitBag\SyliusMultiSafepayPlugin\Action\Api\ApiAwareTrait;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\ApiAwareInterface;
+use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\GatewayAwareInterface;
 use Payum\Core\GatewayAwareTrait;
+use Payum\Core\Request\Convert;
 use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Payum\Core\Request\Convert;
-use Payum\Core\Bridge\Spl\ArrayObject;
 
 final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterface, ApiAwareInterface
 {
