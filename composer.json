@@ -1,5 +1,5 @@
 {
-    "name": "bitbag/multisafepay",
+    "name": "bitbag/multisafepay-plugin",
     "type": "sylius-plugin",
     "keywords": ["sylius", "sylius-plugin"],
     "description": "MultiSafepay payment plugin for Sylius applications.",
