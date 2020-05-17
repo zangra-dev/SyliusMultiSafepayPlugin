@@ -12,18 +12,18 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiSafepayPlugin\Action\Api;
 
-use BitBag\SyliusMultiSafepayPlugin\ApiClient\MultiSafepayApiClient;
+use BitBag\SyliusMultiSafepayPlugin\ApiClient\MultiSafepayApiClientInterface;
 use Payum\Core\Exception\UnsupportedApiException;
 
 trait ApiAwareTrait
 {
-    /** @var MultiSafepayApiClient */
+    /** @var MultiSafepayApiClientInterface */
     protected $multiSafepayApiClient;
 
     public function setApi($multiSafepayApiClient): void
     {
-        if (!$multiSafepayApiClient instanceof MultiSafepayApiClient) {
-            throw new UnsupportedApiException('Not supported.Expected an instance of ' . MultiSafepayApiClient::class);
+        if (!$multiSafepayApiClient instanceof MultiSafepayApiClientInterface) {
+            throw new UnsupportedApiException('Not supported.Expected an instance of ' . MultiSafepayApiClientInterface::class);
         }
 
         $this->multiSafepayApiClient = $multiSafepayApiClient;

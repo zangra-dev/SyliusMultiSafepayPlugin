@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiSafepayPlugin\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use BitBag\SyliusMultiSafepayPlugin\ApiClient\MultiSafepayApiClientInterface;
+use BitBag\SyliusMultiSafepayPlugin\MultiSafepayGatewayFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -51,26 +53,28 @@ final class MultiSafepayContext implements Context
         $this->paymentMethodManager = $paymentMethodManager;
     }
 
-//    /**
-//     * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode and PayPlug payment gateway
-//     */
-//    public function theStoreHasAPaymentMethodWithACodeAndPayPlugPaymentGateway(string $paymentMethodName, string $paymentMethodCode): void
-//    {
-//        $paymentMethod = $this->createPaymentMethodPayPlug(
-//            $paymentMethodName,
-//            $paymentMethodCode,
-//            PayPlugGatewayFactory::FACTORY_NAME,
-//            'PayPlug'
-//        );
-//
-//        $paymentMethod->getGatewayConfig()->setConfig([
-//            'secretKey' => 'test',
-//            'notificationUrlDev' => 'http://test',
-//            'payum.http_client' => '@payplug_sylius_payplug_plugin.api_client.payplug',
-//        ]);
-//
-//        $this->paymentMethodManager->flush();
-//    }
+    /**
+     * @Given the store has a payment method :arg1 with a code :arg2 and MultiSafepay payment gateway
+     */
+    public function theStoreHasAPaymentMethodWithACodeAndMultisafepayPaymentGateway(
+        string $paymentMethodName,
+        string $paymentMethodCode
+    ): void {
+        $paymentMethod = $this->createPaymentMethodMultiSafepay(
+            $paymentMethodName,
+            $paymentMethodCode,
+            MultiSafepayGatewayFactory::FACTORY_NAME,
+            'MultiSafepay'
+        );
+
+        $paymentMethod->getGatewayConfig()->setConfig([
+            'apiKey' => 'test',
+            'payum.http_client' => '@bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client',
+            'type' => MultiSafepayApiClientInterface::REDIRECT_ORDER_TYPE,
+        ]);
+
+        $this->paymentMethodManager->flush();
+    }
 
     private function createPaymentMethodMultiSafepay(
         string $name,

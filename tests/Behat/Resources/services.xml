@@ -8,5 +8,9 @@
 
     <services>
         <defaults public="true" />
+
+        <service id="bitbag_sylius_multisafepay_plugin.behat.multisafepay_api_client_mocker" class="Tests\BitBag\SyliusMultiSafepayPlugin\Behat\Mocker\MultiSafepayApiClientMocker">
+            <argument type="service" id="sylius.behat.mocker" />
+        </service>
     </services>
 </container>
