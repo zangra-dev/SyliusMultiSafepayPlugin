@@ -15,6 +15,7 @@ namespace BitBag\SyliusMultiSafepayPlugin\PaymentProcessing;
 use BitBag\SyliusMultiSafepayPlugin\ApiClient\MultiSafepayApiClientInterface;
 use BitBag\SyliusMultiSafepayPlugin\MultiSafepayGatewayFactory;
 use Psr\Log\LoggerInterface;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
@@ -48,8 +49,11 @@ final class RefundPaymentProcessor implements PaymentProcessorInterface
 
         $details = $payment->getDetails();
 
+        /** @var GatewayConfigInterface $gatewayConfig */
+        $gatewayConfig = $paymentMethod->getGatewayConfig();
+
         if (
-            MultiSafepayGatewayFactory::FACTORY_NAME !== $paymentMethod->getGatewayConfig()->getFactoryName() ||
+            MultiSafepayGatewayFactory::FACTORY_NAME !== $gatewayConfig->getFactoryName() ||
             (isset($details['status']) && MultiSafepayApiClientInterface::STATUS_REFUNDED === $details['status'])
         ) {
             return;
@@ -61,7 +65,7 @@ final class RefundPaymentProcessor implements PaymentProcessorInterface
             return;
         }
 
-        $gatewayConfig = $paymentMethod->getGatewayConfig()->getConfig();
+        $gatewayConfig = $gatewayConfig->getConfig();
 
         $this->multiSafepayApiClient->initialise(
             $gatewayConfig['apiKey'],
@@ -70,7 +74,7 @@ final class RefundPaymentProcessor implements PaymentProcessorInterface
         );
 
         try {
-            $this->multiSafepayApiClient->refund($details['orderId'], 32, $payment->getCurrencyCode());
+            $this->multiSafepayApiClient->refund($details['orderId'], $payment->getAmount(), $payment->getCurrencyCode());
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
 

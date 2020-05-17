@@ -54,11 +54,12 @@ final class CaptureAction implements ActionInterface, ApiAwareInterface, Gateway
 
     public function execute($request): void
     {
+        /** @var Capture $request */
         RequestNotSupportedException::assertSupports($this, $request);
 
         $details = ArrayObject::ensureArrayObject($request->getModel());
 
-        if (isset($details['status'], $details['orderId'])) {
+        if (isset($details['orderId'])) {
             return;
         }
 
