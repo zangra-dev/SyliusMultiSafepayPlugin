@@ -21,6 +21,8 @@ use Payum\Core\GatewayAwareInterface;
 use Payum\Core\GatewayAwareTrait;
 use Payum\Core\Request\Convert;
 use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
+use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
@@ -46,8 +48,13 @@ final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterfa
         /** @var OrderInterface $order */
         $order = $payment->getOrder();
 
+        /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();
+
+        /** @var AddressInterface $shippingAddress */
         $shippingAddress = $order->getShippingAddress();
+
+        /** @var AddressInterface $billingAddress */
         $billingAddress = $order->getBillingAddress();
 
         $details = ArrayObject::ensureArrayObject($payment->getDetails());
