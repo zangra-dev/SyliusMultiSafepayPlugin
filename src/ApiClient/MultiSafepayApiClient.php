@@ -51,4 +51,15 @@ class MultiSafepayApiClient implements MultiSafepayApiClientInterface
     {
         return $this->type;
     }
+
+    public function refund(string $orderId, int $amount, string $currencyCode): void
+    {
+        $endpoint = sprintf('orders/%s/refunds', $orderId);
+
+        $this->client->orders->post([
+            'type' => 'refund',
+            'amount' => $amount,
+            'currency' => $currencyCode,
+        ], $endpoint);
+    }
 }

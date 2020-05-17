@@ -49,4 +49,13 @@ class MultiSafepayApiClient implements MultiSafepayApiClientInterface
     {
         return $this->container->get('bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client')->createPayment($data);
     }
+
+    public function refund(string $orderId, int $amount, string $currencyCode): void
+    {
+        $this->container->get('bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client')->refund(
+            $orderId,
+            $amount,
+            $currencyCode
+        );
+    }
 }

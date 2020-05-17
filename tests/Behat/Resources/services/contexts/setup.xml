@@ -12,5 +12,12 @@
             <argument type="service" id="sylius.manager.payment_method" />
             <tag name="fob.context_service" />
         </service>
+
+        <service id="bitbag_sylius_multisafepay_plugin.behat.context.setup.order" class="Tests\BitBag\SyliusMultiSafepayPlugin\Behat\Context\Setup\OrderContext">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="payum" />
+            <tag name="fob.context_service" />
+        </service>
     </services>
 </container>

@@ -1,3 +1,4 @@
 imports:
     - suites/ui/managing_payment_method_multisafepay.yml
     - suites/ui/paying_with_multisafepay_for_order.yml
+    - suites/ui/refunding_multisafepay_payment.yml

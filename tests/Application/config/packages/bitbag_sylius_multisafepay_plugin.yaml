@@ -1,0 +1,2 @@
+imports:
+    - { resource: "@BitBagSyliusMultiSafepayPlugin/Resources/config/config.yml" }

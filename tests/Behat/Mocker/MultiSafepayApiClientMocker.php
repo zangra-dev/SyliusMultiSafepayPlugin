@@ -124,4 +124,24 @@ final class MultiSafepayApiClientMocker
 
         $this->mocker->unmockAll();
     }
+
+    public function mockApiRefundedPayment(callable $action): void
+    {
+        $mock = $this->mocker->mockService(
+            'bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client',
+            MultiSafepayApiClientInterface::class
+        );
+
+        $mock
+            ->shouldReceive('initialise')
+        ;
+
+        $mock
+            ->shouldReceive('refund')
+        ;
+
+        $action();
+
+        $this->mocker->unmockAll();
+    }
 }

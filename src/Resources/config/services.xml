@@ -9,5 +9,11 @@
 
     <services>
         <service id="bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client" class="BitBag\SyliusMultiSafepayPlugin\ApiClient\MultiSafepayApiClient" public="true" />
+
+        <service id="bitbag_sylius_multisafepay_plugin.payment_processing.refund" class="BitBag\SyliusMultiSafepayPlugin\PaymentProcessing\RefundPaymentProcessor" public="true">
+            <argument type="service" id="session" />
+            <argument type="service" id="bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client" />
+            <argument type="service" id="monolog.logger.payum" />
+        </service>
     </services>
 </container>

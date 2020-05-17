@@ -38,4 +38,6 @@ interface MultiSafepayApiClientInterface
     public function getOrderById(string $id): \stdClass;
 
     public function getType(): string;
+
+    public function refund(string $orderId, int $amount, string $currencyCode): void;
 }
