@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.2",
 
-        "sylius/sylius": "1.5.x",
+        "sylius/sylius": "^1.5",
         "multisafepay/api": "^2.0"
     },
     "require-dev": {
