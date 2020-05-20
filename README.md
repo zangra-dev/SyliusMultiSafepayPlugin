@@ -49,8 +49,19 @@ This plugin allows you to integrate MultiSafepay payment with Sylius platform ap
         BitBag\SyliusMultiSafepayPlugin\BitBagSyliusMultiSafepayPlugin::class => ['all' => true],
     ];
     ```
+    
+4. MultiSafepay allows resuming payments from state "failed" or "canceled". Therefore, overwrite config state machine in your `config/packages/_sylius.yaml` file:
 
-4. Clear cache:
+    ```yaml
+    winzou_state_machine:
+        sylius_payment:
+            transitions:
+                process:
+                    from: [new, cancelled, failed]
+                    to: processing
+    ```
+
+5. Clear cache:
 
     ```bash
     bin/console cache:clear

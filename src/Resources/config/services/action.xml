@@ -20,6 +20,7 @@
 
         <service id="bitbag_sylius_multisafepay_plugin.action.notify" class="BitBag\SyliusMultiSafepayPlugin\Action\NotifyAction">
             <argument type="service" id="monolog.logger.payum" />
+            <argument type="service" id="sm.factory" />
             <tag name="payum.action" factory="multisafepay" alias="payum.action.notify" />
         </service>
     </services>

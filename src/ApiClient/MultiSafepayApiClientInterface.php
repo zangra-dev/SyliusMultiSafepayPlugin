@@ -40,4 +40,6 @@ interface MultiSafepayApiClientInterface
     public function getType(): string;
 
     public function refund(string $orderId, int $amount, string $currencyCode): void;
+
+    public function isPaymentActive(string $status): bool;
 }

@@ -12,3 +12,10 @@ parameters:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+winzou_state_machine:
+    sylius_payment:
+        transitions:
+            process:
+                from: [new, cancelled, failed]
+                to: processing

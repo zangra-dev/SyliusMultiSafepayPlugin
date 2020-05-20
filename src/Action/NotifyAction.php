@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiSafepayPlugin\Action;
 
 use BitBag\SyliusMultiSafepayPlugin\Action\Api\ApiAwareTrait;
+use BitBag\SyliusMultiSafepayPlugin\MultiSafepayGatewayFactory;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\ApiAwareInterface;
 use Payum\Core\Bridge\Spl\ArrayObject;
@@ -22,6 +23,11 @@ use Payum\Core\Reply\HttpResponse;
 use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Request\Notify;
 use Psr\Log\LoggerInterface;
+use SM\Factory\FactoryInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 
 final class NotifyAction implements ActionInterface, ApiAwareInterface, GatewayAwareInterface
 {
@@ -30,13 +36,18 @@ final class NotifyAction implements ActionInterface, ApiAwareInterface, GatewayA
     /** @var LoggerInterface */
     private $logger;
 
-    public function __construct(LoggerInterface $logger)
+    /** @var FactoryInterface */
+    private $stateMachineFactory;
+
+    public function __construct(LoggerInterface $logger, FactoryInterface $stateMachineFactory)
     {
         $this->logger = $logger;
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function execute($request): void
     {
+        /** @var $request Notify */
         $details = ArrayObject::ensureArrayObject($request->getModel());
 
         $this->gateway->execute($httpRequest = new GetHttpRequest());
@@ -45,9 +56,39 @@ final class NotifyAction implements ActionInterface, ApiAwareInterface, GatewayA
             throw new HttpResponse(null, 400);
         }
 
-        $order = $this->multiSafepayApiClient->getOrderById($details['orderId']);
+        /** @var PaymentInterface $payment */
+        $payment = $request->getFirstModel();
 
-        $details['status'] = $order->status;
+        /** @var OrderInterface $order */
+        $order = $payment->getOrder();
+
+        /** @var PaymentInterface $item */
+        foreach ($order->getPayments() as $item) {
+            /** @var PaymentMethodInterface $method */
+            $method = $item->getMethod();
+
+            if (
+                PaymentInterface::STATE_NEW === $item->getState() &&
+                MultiSafepayGatewayFactory::FACTORY_NAME === $method->getGatewayConfig()->getFactoryName() &&
+                $payment !== $item
+            ) {
+                $order->removePayment($item);
+            }
+        }
+
+        $paymentStateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
+
+        $orderData = $this->multiSafepayApiClient->getOrderById($details['orderId']);
+
+        if (
+            (PaymentInterface::STATE_FAILED === $payment->getState() || PaymentInterface::STATE_CANCELLED === $payment->getState()) &&
+            $paymentStateMachine->can(PaymentTransitions::TRANSITION_PROCESS) &&
+            $this->multiSafepayApiClient->isPaymentActive($orderData->status)
+        ) {
+            $paymentStateMachine->apply(PaymentTransitions::TRANSITION_PROCESS);
+        }
+
+        $details['status'] = $orderData->status;
 
         throw new HttpResponse('OK', 200);
     }
