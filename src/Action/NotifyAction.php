@@ -24,6 +24,7 @@ use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Request\Notify;
 use Psr\Log\LoggerInterface;
 use SM\Factory\FactoryInterface;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -47,7 +48,7 @@ final class NotifyAction implements ActionInterface, ApiAwareInterface, GatewayA
 
     public function execute($request): void
     {
-        /** @var $request Notify */
+        /** @var Notify $request  */
         $details = ArrayObject::ensureArrayObject($request->getModel());
 
         $this->gateway->execute($httpRequest = new GetHttpRequest());
@@ -67,9 +68,12 @@ final class NotifyAction implements ActionInterface, ApiAwareInterface, GatewayA
             /** @var PaymentMethodInterface $method */
             $method = $item->getMethod();
 
+            /** @var GatewayConfigInterface $gatewayConfig */
+            $gatewayConfig = $method->getGatewayConfig();
+
             if (
                 PaymentInterface::STATE_NEW === $item->getState() &&
-                MultiSafepayGatewayFactory::FACTORY_NAME === $method->getGatewayConfig()->getFactoryName() &&
+                MultiSafepayGatewayFactory::FACTORY_NAME === $gatewayConfig->getFactoryName() &&
                 $payment !== $item
             ) {
                 $order->removePayment($item);

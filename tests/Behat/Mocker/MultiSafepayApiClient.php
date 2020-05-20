@@ -58,4 +58,9 @@ class MultiSafepayApiClient implements MultiSafepayApiClientInterface
             $currencyCode
         );
     }
+
+    public function isPaymentActive(string $status): bool
+    {
+        return $this->container->get('bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client')->isPaymentActive($status);
+    }
 }
