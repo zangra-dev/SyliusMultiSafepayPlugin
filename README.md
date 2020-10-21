@@ -43,9 +43,9 @@ We work on stable, supported and up-to-date versions of packages. We recommend y
 ---
 Require plugin with composer:
 
-    ```bash
-    composer require bitbag/multisafepay-plugin
-    ```
+```bash
+composer require bitbag/multisafepay-plugin
+```
 
 Import configuration in your `config/packages/bitbag_sylius_multisafepay_plugin.yaml` file:
 
@@ -56,28 +56,28 @@ imports:
 
 Add plugin class to your `config/bundles.php` file:
 
-    ```php
-    $bundles = [
-        BitBag\SyliusMultiSafepayPlugin\BitBagSyliusMultiSafepayPlugin::class => ['all' => true],
-    ];
-    ```
+```php
+$bundles = [
+    BitBag\SyliusMultiSafepayPlugin\BitBagSyliusMultiSafepayPlugin::class => ['all' => true],
+];
+```
     
 MultiSafepay allows resuming payments from state "failed" or "canceled". Therefore, overwrite config state machine in your `config/packages/_sylius.yaml` file:
 
-    ```yaml
-    winzou_state_machine:
-        sylius_payment:
-            transitions:
-                process:
-                    from: [new, cancelled, failed]
-                    to: processing
-    ```
+```yaml
+winzou_state_machine:
+    sylius_payment:
+        transitions:
+            process:
+                from: [new, cancelled, failed]
+                to: processing
+```
 
 Clear cache:
 
-    ```bash
-    bin/console cache:clear
-    ```
+```bash
+bin/console cache:clear
+```
  
 ## Customization
 ----
