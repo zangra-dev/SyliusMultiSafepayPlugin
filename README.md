@@ -41,6 +41,7 @@ We work on stable, supported and up-to-date versions of packages. We recommend y
 |:-------------:|:--------------:|
 | PHP           |  ^7.2  |
 ---
+| Sylius           |  ^1.5  |
 Require plugin with composer:
 
 ```bash
