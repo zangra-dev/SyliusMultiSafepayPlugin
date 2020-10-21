@@ -59,7 +59,7 @@ imports:
 Add plugin class to your `config/bundles.php` file:
 
 ```php
-$bundles = [
+return [
     BitBag\SyliusMultiSafepayPlugin\BitBagSyliusMultiSafepayPlugin::class => ['all' => true],
 ];
 ```
