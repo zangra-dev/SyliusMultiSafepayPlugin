@@ -49,10 +49,10 @@ Require plugin with composer:
 
 Import configuration in your `config/packages/bitbag_sylius_multisafepay_plugin.yaml` file:
 
-    ```yaml
-    imports:
-        - { resource: "@BitBagSyliusMultiSafepayPlugin/Resources/config/config.yml" }
-    ```
+```yaml
+imports:
+    - { resource: "@BitBagSyliusMultiSafepayPlugin/Resources/config/config.yml" }
+```
 
 Add plugin class to your `config/bundles.php` file:
 
