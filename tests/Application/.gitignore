@@ -7,6 +7,7 @@
 !/public/media/image/.gitignore
 
 /node_modules
+/yarn.lock
 
 ###> symfony/framework-bundle ###
 /.env.*.local
