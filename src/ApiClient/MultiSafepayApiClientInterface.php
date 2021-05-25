@@ -17,7 +17,7 @@ use MultiSafepayAPI\Object\Orders;
 interface MultiSafepayApiClientInterface
 {
     public const API_URL_TEST = 'https://testapi.multisafepay.com/v1/json/';
-    public const API_URL_LIVE = 'https://api.multisafepay.com/v1/json';
+    public const API_URL_LIVE = 'https://api.multisafepay.com/v1/json/';
     public const PAYMENT_LINK_TYPE = 'paymentlink';
     public const REDIRECT_ORDER_TYPE = 'redirect';
     public const STATUS_CANCEL = 'cancel';
