@@ -1,5 +1,6 @@
 /vendor/
 /node_modules/
+/.idea/
 /composer.lock
 
 /etc/build/*
@@ -9,3 +10,5 @@
 
 /behat.yml
 /phpspec.yml
+
+
