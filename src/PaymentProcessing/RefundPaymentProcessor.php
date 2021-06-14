@@ -74,7 +74,7 @@ final class RefundPaymentProcessor implements PaymentProcessorInterface
         );
 
         try {
-            $this->multiSafepayApiClient->refund($details['orderId'], $payment->getAmount(), $payment->getCurrencyCode());
+            $this->multiSafepayApiClient->refund($details['orderId'], (int) $payment->getAmount(), (string) $payment->getCurrencyCode());
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
 

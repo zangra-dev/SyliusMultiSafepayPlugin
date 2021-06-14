@@ -12,25 +12,25 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusMultiSafepayPlugin\Behat\Page\Shop\Payum;
 
-use FriendsOfBehat\PageObjectExtension\Page\Page;
 use Behat\Mink\Session;
+use FriendsOfBehat\PageObjectExtension\Page\Page;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\BrowserKit\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 final class PaymentPage extends Page implements PaymentPageInterface
 {
     /** @var RepositoryInterface */
     private $securityTokenRepository;
 
-    /** @var Client */
+    /** @var KernelBrowser */
     private $client;
 
     public function __construct(
         Session $session,
         $parameters,
         RepositoryInterface $securityTokenRepository,
-        Client $client
+        KernelBrowser $client
     ) {
         parent::__construct($session, $parameters);
 

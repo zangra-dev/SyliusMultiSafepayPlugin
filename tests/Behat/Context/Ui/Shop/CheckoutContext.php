@@ -14,8 +14,8 @@ namespace Tests\BitBag\SyliusMultiSafepayPlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use BitBag\SyliusMultiSafepayPlugin\ApiClient\MultiSafepayApiClientInterface;
-use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
+use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Tests\BitBag\SyliusMultiSafepayPlugin\Behat\Mocker\MultiSafepayApiClientMocker;
 use Tests\BitBag\SyliusMultiSafepayPlugin\Behat\Page\Shop\Payum\PaymentPageInterface;
 

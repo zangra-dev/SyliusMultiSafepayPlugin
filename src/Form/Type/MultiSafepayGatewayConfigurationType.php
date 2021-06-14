@@ -52,7 +52,7 @@ final class MultiSafepayGatewayConfigurationType extends AbstractType
                     ]),
                 ],
             ])
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $data = $event->getData();
 
                 $data['payum.http_client'] = '@bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client';

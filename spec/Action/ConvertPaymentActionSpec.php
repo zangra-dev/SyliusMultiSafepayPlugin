@@ -50,8 +50,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         AddressInterface $address,
         MultiSafepayApiClientInterface $multiSafepayApiClient,
         PaymentDescriptionProviderInterface $paymentDescriptionProvider
-    ): void
-    {
+    ): void {
         $this->setGateway($gateway);
         $this->setApi($multiSafepayApiClient);
 
@@ -89,11 +88,10 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
                     'city' => null,
                     'country' => null,
                     'phone' => null,
-                    'email' => null
-                ]
-            ]
+                    'email' => null,
+                ],
+            ],
         ])->shouldBeCalled();
-
 
         $this->execute($request);
     }
@@ -101,8 +99,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
     function it_supports_only_convert_request_payment_source_and_array_to(
         Convert $request,
         PaymentInterface $payment
-    ): void
-    {
+    ): void {
         $request->getSource()->willReturn($payment);
         $request->getTo()->willReturn('array');
         $this->supports($request)->shouldReturn(true);

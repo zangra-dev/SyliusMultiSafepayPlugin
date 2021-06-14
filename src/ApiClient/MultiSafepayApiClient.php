@@ -65,6 +65,6 @@ class MultiSafepayApiClient implements MultiSafepayApiClientInterface
 
     public function isPaymentActive(string $status): bool
     {
-        return in_array($status, [self::STATUS_INITIALIZED, self::STATUS_COMPLETED, self::STATUS_UNCLEARED, self::STATUS_RESERVED]);
+        return in_array($status, [self::STATUS_INITIALIZED, self::STATUS_COMPLETED, self::STATUS_UNCLEARED, self::STATUS_RESERVED], true);
     }
 }

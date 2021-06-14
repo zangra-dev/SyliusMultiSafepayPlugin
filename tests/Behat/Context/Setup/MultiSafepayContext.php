@@ -15,7 +15,7 @@ namespace Tests\BitBag\SyliusMultiSafepayPlugin\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use BitBag\SyliusMultiSafepayPlugin\ApiClient\MultiSafepayApiClientInterface;
 use BitBag\SyliusMultiSafepayPlugin\MultiSafepayGatewayFactory;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -36,7 +36,7 @@ final class MultiSafepayContext implements Context
     /** @var FactoryInterface */
     private $paymentMethodTranslationFactory;
 
-    /** @var ObjectManager */
+    /** @var EntityManagerInterface */
     private $paymentMethodManager;
 
     public function __construct(
@@ -44,7 +44,7 @@ final class MultiSafepayContext implements Context
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ExampleFactoryInterface $paymentMethodExampleFactory,
         FactoryInterface $paymentMethodTranslationFactory,
-        ObjectManager $paymentMethodManager
+        EntityManagerInterface $paymentMethodManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paymentMethodRepository = $paymentMethodRepository;

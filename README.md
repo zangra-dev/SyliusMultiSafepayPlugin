@@ -1,6 +1,7 @@
 # [![](https://bitbag.io/wp-content/uploads/2020/10/multisafepay.png)](https://bitbag.io/?utm_source=github&utm_medium=referral&utm_campaign=plugins_multisafepay) 
 
 # MultiSafepay Payments Plugin for Sylius
+
 ----
 
 [![](https://img.shields.io/packagist/l/bitbag/multisafepay-plugin.svg) ](https://packagist.org/packages/bitbag/multisafepay-plugin "License") [ ![](https://img.shields.io/packagist/v/bitbag/multisafepay-plugin.svg) ](https://packagist.org/packages/bitbag/multisafepay-plugin "Version") [ ![](https://travis-ci.org/BitBagCommerce/SyliusMultiSafepayPlugin.svg?branch=master) ](https://travis-ci.org/BitBagCommerce/SyliusMultiSafepayPlugin "Build status")[ ![](https://img.shields.io/scrutinizer/g/BitBagCommerce/SyliusBraintreePlugin.svg) ](https://scrutinizer-ci.com/g/BitBagCommerce/SyliusMultiSafepayPlugin "Scrutinizer") [![](https://poser.pugx.org/bitbag/multisafepay-plugin/downloads)](https://packagist.org/packages/bitbag/multisafepay-plugin "Total Downloads") [![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com) [![Support](https://img.shields.io/badge/support-contact%20author-blue])](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_multisafepay)
@@ -8,8 +9,9 @@
 At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at [https://bitbag.io/](https://bitbag.io/?utm_source=github&utm_medium=referral&utm_campaign=plugins_multisafepay).
 
 ## Table of Content
+
 ---
-* [Overwiev](#overwiev)
+* [Overview](#overview)
 * [Installation](#installation)
   * [Requirements](#requirements)
   * [Customization](#customization)
@@ -22,7 +24,8 @@ At BitBag we do believe in open source. However, we are able to do it just becau
 * [Contact](#contact)
 
 
-# Overwiev
+# overview
+
 ---
 This plugin allows you to integrate MultiSafepay payment with Sylius platform app.
 
@@ -33,6 +36,7 @@ This **open-source plugin was developed to help the Sylius community** and make 
 
 
 # Installation
+
 ---
 
 ## Requirements
@@ -84,6 +88,7 @@ bin/console cache:clear
 ```
  
 ## Customization
+
 ----
 ### Available services you can [decorate](https://symfony.com/doc/current/service_container/service_decoration.html) and forms you can [extend](http://symfony.com/doc/current/form/create_form_type_extension.html)
 
@@ -94,6 +99,7 @@ $ bin/console debug:container bitbag_sylius_multisafepay_plugin
 ```
 
 ## Testing
+
 ----
 ```bash
 $ composer install
@@ -111,6 +117,7 @@ $ bin/phpspec run
 
 
 # About us
+
 ---
 
 BitBag is an agency that provides high-quality **eCommerce and Digital Experience software**. Our main area of expertise includes eCommerce consulting and development for B2C, B2B, and Multi-vendor Marketplaces. 
@@ -137,15 +144,18 @@ If you need some help with Sylius development, don't be hesitate to contact us d
 [![](https://bitbag.io/wp-content/uploads/2020/10/badges-sylius.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_multisafepay) 
 
 ## Community
+
 ----
 For online communication, we invite you to chat with us & other users on [Sylius Slack](https://sylius-devs.slack.com/). 
 
 # Demo Sylius shop
+
 ---
 
 We created a demo app with some useful use-cases of plugins!
 Visit b2b.bitbag.shop to take a look at it. The admin can be accessed under https://b2b.bitbag.shop/admin/login link and sylius: sylius credentials.
 Plugins that we have used in the demo:
+
 | BitBag's Plugin | GitHub | Sylius' Store|
 | ------ | ------ | ------|
 | ACL PLugin | *Private. Available after the purchasing.*| https://plugins.sylius.com/plugin/access-control-layer-plugin/| 
@@ -166,6 +176,7 @@ Plugins that we have used in the demo:
 
 
 ## Additional resources for developers
+
 ---
 To learn more about our contribution workflow and more, we encourage ypu to use the following resources:  
 * [Sylius Documentation](https://docs.sylius.com/en/latest/)
@@ -175,6 +186,7 @@ To learn more about our contribution workflow and more, we encourage ypu to use 
 
    
 ## License
+
  ---
 
 This plugin's source code is completely free and released under the terms of the MIT license.
@@ -182,6 +194,7 @@ This plugin's source code is completely free and released under the terms of the
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.) 
 
 ## Contact
+
 ---
 If you want to contact us, the best way is to fill the form on  [our website](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_multisafepay) or send us an e-mail to hello@bitbag.io with your question(s). We guarantee that we answer as soon as we can! 
 

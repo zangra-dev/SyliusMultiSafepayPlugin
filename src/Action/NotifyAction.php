@@ -48,13 +48,13 @@ final class NotifyAction implements ActionInterface, ApiAwareInterface, GatewayA
 
     public function execute($request): void
     {
-        /** @var Notify $request  */
+        /** @param Notify $request */
         $details = ArrayObject::ensureArrayObject($request->getModel());
 
         $this->gateway->execute($httpRequest = new GetHttpRequest());
 
         if (!isset($httpRequest->query['transactionid'])) {
-            throw new HttpResponse(null, 400);
+            throw new HttpResponse('', 400);
         }
 
         /** @var PaymentInterface $payment */

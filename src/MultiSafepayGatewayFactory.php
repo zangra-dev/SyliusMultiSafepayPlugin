@@ -20,7 +20,7 @@ final class MultiSafepayGatewayFactory extends GatewayFactory
 {
     public const FACTORY_NAME = 'multisafepay';
 
-    protected function populateConfig(ArrayObject $config)
+    protected function populateConfig(ArrayObject $config): void
     {
         $config->defaults([
             'payum.factory_name' => self::FACTORY_NAME,
@@ -42,7 +42,7 @@ final class MultiSafepayGatewayFactory extends GatewayFactory
                 'type',
             ];
 
-            $config['payum.api'] = function (ArrayObject $config) {
+            $config['payum.api'] = function (ArrayObject $config): MultiSafepayApiClientInterface {
                 $config->validateNotEmpty($config['payum.required_options']);
 
                 /** @var MultiSafepayApiClientInterface $multiSafepayApiClient */

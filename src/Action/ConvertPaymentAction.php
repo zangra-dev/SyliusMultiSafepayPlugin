@@ -69,7 +69,7 @@ final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterfa
                 'locale' => $order->getLocaleCode(),
                 'ip_address' => $order->getCustomerIp(),
                 'first_name' => $shippingAddress->getFirstName(),
-                'last_name' => $shippingAddress->getFirstName(),
+                'last_name' => $shippingAddress->getLastName(),
                 'address1' => $shippingAddress->getStreet(),
                 'zip_code' => $shippingAddress->getPostcode(),
                 'city' => $shippingAddress->getCity(),
