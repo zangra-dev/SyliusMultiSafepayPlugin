@@ -23,12 +23,15 @@ class MultiSafepayApiClient implements MultiSafepayApiClientInterface
     /** @var string */
     private $type;
 
-    public function initialise(string $apiKey, string $type, bool $sandbox = true): void
+    /** @var bool */
+    private $allowMultiCurrency;
+
+    public function initialise(string $apiKey, string $type, bool $sandbox = true, bool $allowMultiCurrency = false): void
     {
         $this->type = $type;
+        $this->allowMultiCurrency = $allowMultiCurrency;
 
         $this->client = new Client();
-
         $this->client->setApiKey($apiKey);
         $this->client->setApiUrl(
             $sandbox ? self::API_URL_TEST : self::API_URL_LIVE
@@ -50,6 +53,11 @@ class MultiSafepayApiClient implements MultiSafepayApiClientInterface
     public function getType(): string
     {
         return $this->type;
+    }
+
+    public function getAllowMultiCurrency(): bool
+    {
+        return $this->allowMultiCurrency;
     }
 
     public function refund(string $orderId, int $amount, string $currencyCode): void

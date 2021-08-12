@@ -15,6 +15,7 @@
 
         <service id="bitbag_sylius_multisafepay_plugin.action.convert_payment" class="BitBag\SyliusMultiSafepayPlugin\Action\ConvertPaymentAction">
             <argument type="service" id="sylius.payment_description_provider" />
+            <argument type="service" id="sylius.context.channel" />
             <tag name="payum.action" factory="multisafepay" alias="payum.action.convert_payment" />
         </service>
 

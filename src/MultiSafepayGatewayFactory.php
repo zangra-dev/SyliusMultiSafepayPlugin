@@ -33,6 +33,7 @@ final class MultiSafepayGatewayFactory extends GatewayFactory
                 'apiKey' => null,
                 'sandbox' => true,
                 'type' => null,
+                'allow_multi_currency' => false,
             ];
 
             $config->defaults($config['payum.default_options']);
@@ -40,6 +41,7 @@ final class MultiSafepayGatewayFactory extends GatewayFactory
             $config['payum.required_options'] = [
                 'apiKey',
                 'type',
+                'allow_multi_currency',
             ];
 
             $config['payum.api'] = function (ArrayObject $config): MultiSafepayApiClientInterface {
@@ -47,8 +49,7 @@ final class MultiSafepayGatewayFactory extends GatewayFactory
 
                 /** @var MultiSafepayApiClientInterface $multiSafepayApiClient */
                 $multiSafepayApiClient = $config['payum.http_client'];
-
-                $multiSafepayApiClient->initialise($config['apiKey'], $config['type'], $config['sandbox']);
+                $multiSafepayApiClient->initialise($config['apiKey'], $config['type'], $config['sandbox'], $config['allow_multi_currency']);
 
                 return $multiSafepayApiClient;
             };

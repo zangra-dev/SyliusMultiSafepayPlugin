@@ -39,6 +39,9 @@ final class MultiSafepayGatewayConfigurationType extends AbstractType
             ->add('sandbox', CheckboxType::class, [
                 'label' => 'bitbag_sylius_multisafepay.ui.sandbox',
             ])
+            ->add('allow_multi_currency', CheckboxType::class, [
+                'label' => 'bitbag_sylius_multisafepay.ui.allow_multi_currency',
+            ])
             ->add('type', ChoiceType::class, [
                 'label' => 'bitbag_sylius_multisafepay.ui.type',
                 'choices' => [

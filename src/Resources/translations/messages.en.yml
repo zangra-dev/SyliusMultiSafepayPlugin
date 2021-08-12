@@ -6,3 +6,4 @@ bitbag_sylius_multisafepay:
         payment_link: Payment link
         redirect_order: Redirect order
         sandbox: Sandbox
+        allow_multi_currency: Allow multi currency payments
