@@ -62,7 +62,7 @@ final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterfa
         /** @var AddressInterface $billingAddress */
         $billingAddress = $order->getBillingAddress();
 
-        $currency = ($this->multiSafepayApiClient->getAllowMultiCurrency()) ? $order->getCurrencyCode() : $this->channelContext->getChannel()->getBaseCurrency();
+        $currency = ($this->multiSafepayApiClient->getAllowMultiCurrency()) ? $order->getCurrencyCode() : $this->channelContext->getChannel()->getBaseCurrency()->getCode();
 
         $details = ArrayObject::ensureArrayObject($payment->getDetails());
         $details['paymentData'] = [
