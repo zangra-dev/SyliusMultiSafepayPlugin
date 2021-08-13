@@ -41,7 +41,6 @@ final class MultiSafepayGatewayFactory extends GatewayFactory
             $config['payum.required_options'] = [
                 'apiKey',
                 'type',
-                'allow_multi_currency',
             ];
 
             $config['payum.api'] = function (ArrayObject $config): MultiSafepayApiClientInterface {
