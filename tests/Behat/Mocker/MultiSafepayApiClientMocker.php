@@ -37,6 +37,10 @@ final class MultiSafepayApiClientMocker
             ->shouldReceive('initialise')
         ;
 
+        $mock
+            ->shouldReceive('getAllowMultiCurrency')
+        ;
+
         $orders = \Mockery::mock('orders', Orders::class);
 
         $orders
@@ -118,6 +122,10 @@ final class MultiSafepayApiClientMocker
 
         $mock
             ->shouldReceive('initialise')
+        ;
+
+        $mock
+            ->shouldReceive('getAllowMultiCurrency')
         ;
 
         $action();
