@@ -23,6 +23,7 @@ use Payum\Core\Request\Convert;
 use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -62,7 +63,9 @@ final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterfa
         /** @var AddressInterface $billingAddress */
         $billingAddress = $order->getBillingAddress();
 
-        $currency = ($this->multiSafepayApiClient->getAllowMultiCurrency()) ? $order->getCurrencyCode() : $this->channelContext->getChannel()->getBaseCurrency()->getCode();
+        /** @var Channel $currentChannel */
+        $currentChannel = $this->channelContext->getChannel();
+        $currency = ($this->multiSafepayApiClient->getAllowMultiCurrency()) ? $order->getCurrencyCode() : $currentChannel->getBaseCurrency()->getCode();
 
         $details = ArrayObject::ensureArrayObject($payment->getDetails());
         $details['paymentData'] = [
