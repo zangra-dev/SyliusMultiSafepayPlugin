@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterface, ApiAwareInterface
 {
@@ -65,7 +66,10 @@ final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterfa
 
         /** @var Channel $currentChannel */
         $currentChannel = $this->channelContext->getChannel();
-        $currency = ($this->multiSafepayApiClient->getAllowMultiCurrency()) ? $order->getCurrencyCode() : $currentChannel->getBaseCurrency()->getCode();
+
+        /** @var CurrencyInterface $baseCurrency */
+        $baseCurrency = $currentChannel->getBaseCurrency();
+        $currency = ($this->multiSafepayApiClient->getAllowMultiCurrency()) ? $order->getCurrencyCode() : $baseCurrency->getCode();
 
         $details = ArrayObject::ensureArrayObject($payment->getDetails());
         $details['paymentData'] = [
