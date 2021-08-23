@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+
 namespace Tests\BitBag\SyliusMultiSafepayPlugin\Application;
 
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
