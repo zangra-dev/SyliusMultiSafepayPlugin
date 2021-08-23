@@ -21,10 +21,13 @@ use Payum\Core\GatewayAwareInterface;
 use Payum\Core\GatewayAwareTrait;
 use Payum\Core\Request\Convert;
 use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterface, ApiAwareInterface
 {
@@ -33,9 +36,13 @@ final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterfa
     /** @var PaymentDescriptionProviderInterface */
     private $paymentDescriptionProvider;
 
-    public function __construct(PaymentDescriptionProviderInterface $paymentDescriptionProvider)
+    /** @var ChannelContextInterface */
+    private $channelContext;
+
+    public function __construct(PaymentDescriptionProviderInterface $paymentDescriptionProvider, ChannelContextInterface $channelContext)
     {
         $this->paymentDescriptionProvider = $paymentDescriptionProvider;
+        $this->channelContext = $channelContext;
     }
 
     public function execute($request): void
@@ -57,12 +64,18 @@ final class ConvertPaymentAction implements ActionInterface, GatewayAwareInterfa
         /** @var AddressInterface $billingAddress */
         $billingAddress = $order->getBillingAddress();
 
-        $details = ArrayObject::ensureArrayObject($payment->getDetails());
+        /** @var Channel $currentChannel */
+        $currentChannel = $this->channelContext->getChannel();
 
+        /** @var CurrencyInterface $baseCurrency */
+        $baseCurrency = $currentChannel->getBaseCurrency();
+        $currency = ($this->multiSafepayApiClient->getAllowMultiCurrency()) ? $order->getCurrencyCode() : $baseCurrency->getCode();
+
+        $details = ArrayObject::ensureArrayObject($payment->getDetails());
         $details['paymentData'] = [
             'type' => $this->multiSafepayApiClient->getType(),
             'order_id' => sprintf('%d-%d-%s', $order->getId(), $payment->getId(), $billingAddress->getCountryCode()),
-            'currency' => $order->getCurrencyCode(),
+            'currency' => $currency,
             'amount' => $payment->getAmount(),
             'description' => $this->paymentDescriptionProvider->getPaymentDescription($payment),
             'customer' => [

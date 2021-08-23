@@ -18,17 +18,26 @@ use Payum\Core\Action\ActionInterface;
 use Payum\Core\GatewayInterface;
 use Payum\Core\Request\Convert;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Currency\Model\Currency;
 
 final class ConvertPaymentActionSpec extends ObjectBehavior
 {
-    function let(PaymentDescriptionProviderInterface $paymentDescriptionProvider): void
+    function let(PaymentDescriptionProviderInterface $paymentDescriptionProvider, ChannelContextInterface $channelContext): void
     {
-        $this->beConstructedWith($paymentDescriptionProvider);
+        $eur = new Currency();
+        $eur->setCode('EUR');
+        $channel = new Channel();
+        $channel->setBaseCurrency($eur);
+        $channelContext->getChannel(Argument::any())->willReturn($channel);
+        $this->beConstructedWith($paymentDescriptionProvider, $channelContext);
     }
 
     function it_is_initializable(): void
@@ -55,6 +64,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $this->setApi($multiSafepayApiClient);
 
         $multiSafepayApiClient->getType()->willReturn(MultiSafepayApiClientInterface::REDIRECT_ORDER_TYPE);
+        $multiSafepayApiClient->getAllowMultiCurrency()->willReturn(false);
         $order->getId()->willReturn(21);
         $request->getSource()->willReturn($payment);
         $request->getTo()->willReturn('array');

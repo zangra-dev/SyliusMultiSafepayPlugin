@@ -70,6 +70,7 @@ final class MultiSafepayContext implements Context
         $paymentMethod->getGatewayConfig()->setConfig([
             'apiKey' => 'test',
             'sandbox' => true,
+            'allow_multi_currency' => false,
             'payum.http_client' => '@bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client',
             'type' => MultiSafepayApiClientInterface::REDIRECT_ORDER_TYPE,
         ]);

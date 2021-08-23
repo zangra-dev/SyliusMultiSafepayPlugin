@@ -36,12 +36,18 @@ class MultiSafepayApiClient implements MultiSafepayApiClientInterface
         return $this->container->get('bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client')->getType();
     }
 
-    public function initialise(string $apiKey, string $type, bool $sandbox = true): void
+    public function getAllowMultiCurrency(): bool
+    {
+        return $this->container->get('bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client')->getAllowMultiCurrency();
+    }
+
+    public function initialise(string $apiKey, string $type, bool $sandbox = true,  bool $allowMultiCurrency = false): void
     {
         $this->container->get('bitbag_sylius_multisafepay_plugin.api_client.multisafepay_api_client')->initialise(
             $apiKey,
             $type,
-            $sandbox
+            $sandbox,
+            $allowMultiCurrency
         );
     }
 
