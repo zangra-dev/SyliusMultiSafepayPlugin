@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+
 namespace Tests\BitBag\SyliusMultiSafepayPlugin\Application;
 
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
@@ -67,7 +68,7 @@ final class Kernel extends BaseKernel
 
     protected function getContainerBaseClass(): string
     {
-        if ($this->isTestEnvironment()) {
+        if ($this->isTestEnvironment() && class_exists(MockerContainer::class)) {
             return MockerContainer::class;
         }
 
